@@ -12,10 +12,19 @@ function App() {
   ]);
   let [like, likeUp] = useState(0);
 
-  function 제목바꾸기() {
-    var newArray = [...글제목]; //deep copy : 새로운 복사본을 생성해주세요. 그냥 쓰면 문제 발생
-    newArray[0] = "여자코트 추천";
-    글제목변경(newArray);
+  // function 제목바꾸기() {
+  //   //state는 건들지 말 것 -> 권장사항이 아님. 나중에 꼬일수도 있음.
+  //   var newArray = [...글제목]; //deep copy : 새로운 복사본을 생성해주세요. 그냥 쓰면 문제 발생
+  //   newArray[0] = "여자코트 추천";
+  //   글제목변경(newArray);
+  // }
+
+  //1.기존 state 카피본 만들기 -> 2.카피본에 수정사항 반영 -> 3.변경함수()에 집어넣기
+
+  function 순서대로정렬() {
+    var newArray = [...글제목];
+    var changeArray = newArray.sort();
+    글제목변경(changeArray);
   }
 
   return (
@@ -23,7 +32,7 @@ function App() {
       <nav className="black-nav">
         <h1>개발 Blog</h1>
       </nav>
-      <button onClick={제목바꾸기}>클릭!</button>
+      <button onClick={순서대로정렬}>클릭!</button>
       <section className="list_wrap">
         <article className="list_container">
           <div className="list">
