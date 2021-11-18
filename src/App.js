@@ -13,7 +13,9 @@ function App() {
   let [like, likeUp] = useState(0);
 
   function 제목바꾸기() {
-    글제목변경(["여자 코트 추천", "강남 우동 맛집", "옷가게 추천"]);
+    var newArray = [...글제목]; //deep copy : 새로운 복사본을 생성해주세요. 그냥 쓰면 문제 발생
+    newArray[0] = "여자코트 추천";
+    글제목변경(newArray);
   }
 
   return (
