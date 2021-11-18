@@ -12,6 +12,8 @@ function App() {
   ]);
   let [like, likeUp] = useState(0);
 
+  let [modal, modal변경] = useState(false);
+
   // function 제목바꾸기() {
   //   //state는 건들지 말 것 -> 권장사항이 아님. 나중에 꼬일수도 있음.
   //   var newArray = [...글제목]; //deep copy : 새로운 복사본을 생성해주세요. 그냥 쓰면 문제 발생
@@ -63,7 +65,16 @@ function App() {
           </div>
         </article>
 
-        <Modal />
+        <button
+          onClick={
+            () => modal변경(modal === false ? true : false)
+            // () => {modal변경(!modal)}
+          }
+        >
+          눌러줘!
+        </button>
+
+        {modal === true ? <Modal /> : null}
       </section>
     </div>
   );
