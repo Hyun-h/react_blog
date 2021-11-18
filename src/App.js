@@ -37,32 +37,26 @@ function App() {
       {/* <button onClick={순서대로정렬}>클릭!</button> */}
       <section className="list_wrap">
         <article className="list_container">
-          <div className="list">
-            <h2>
-              {글제목[0]}
-              <span
-                onClick={() => {
-                  likeUp(like + 1);
-                }}
-              >
-                {" "}
-                👍{" "}
-              </span>
-              {like}
-            </h2>
-            <p>11월 17일</p>
-            <hr />
-          </div>
-          <div className="list">
-            <h2>{글제목[1]}</h2>
-            <p>11월 17일</p>
-            <hr />
-          </div>
-          <div className="list">
-            <h2>{글제목[2]}</h2>
-            <p>11월 17일</p>
-            <hr />
-          </div>
+          {글제목.map((index) => {
+            return (
+              <div className="list">
+                <h2>
+                  {index}
+                  <span
+                    onClick={() => {
+                      likeUp(like + 1);
+                    }}
+                  >
+                    {" "}
+                    👍{" "}
+                  </span>
+                  {like}
+                </h2>
+                <p>11월 17일</p>
+                <hr />
+              </div>
+            );
+          })}
         </article>
 
         <button
