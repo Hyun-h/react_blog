@@ -10,7 +10,7 @@ function App() {
     "강남 우동 맛집",
     "옷가게 추천",
   ]);
-  let [like, likeUp] = useState(0);
+  let [like, likeUp] = useState([0, 0, 0]);
 
   let [modal, modal변경] = useState(false);
 
@@ -37,20 +37,22 @@ function App() {
       {/* <button onClick={순서대로정렬}>클릭!</button> */}
       <section className="list_wrap">
         <article className="list_container">
-          {글제목.map((index) => {
+          {글제목.map((title, index) => {
             return (
-              <div className="list">
+              <div key={index} className="list">
                 <h2>
-                  {index}
+                  {title}
                   <span
                     onClick={() => {
-                      likeUp(like + 1);
+                      const likeCopy = [...like];
+                      likeCopy[index]++;
+                      likeUp(likeCopy);
                     }}
                   >
                     {" "}
                     👍{" "}
                   </span>
-                  {like}
+                  {like[index]}
                 </h2>
                 <p>11월 17일</p>
                 <hr />
@@ -68,17 +70,24 @@ function App() {
           눌러줘!
         </button>
 
-        {modal === true ? <Modal /> : null}
+        {/* 자식의 부모의 state를 쓰고 싶으면 반드시 이야기 해줘야 함.
+        props로 자식에게 state 전해주는 법
+        1. <자식컴포넌트 작명={state명} /> */}
+        {modal === true ? <Modal 글제목={글제목} /> : null}
       </section>
     </div>
   );
 }
 
-function Modal() {
+// props로 자식에게 state 전해주는 법
+// 2. 자식컴포넌트에서 props 파라미터 입력 후 사용
+//부모에게 전달받은 props는 여기에 다 들어있음
+function Modal(props) {
   return (
     <>
       <article className="modal">
-        <h2>제목</h2>
+        {/* 3. 가져다 쓸 때는 꼭 props.state명 */}
+        <h2>{props.글제목[0]}</h2>
         <p>날짜</p>
         <p>상세내용</p>
       </article>
