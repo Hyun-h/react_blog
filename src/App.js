@@ -11,10 +11,9 @@ function App() {
     "옷가게 추천",
   ]);
   let [like, likeUp] = useState([0, 0, 0]);
-
   let [modal, modal변경] = useState(false);
-
   let [누른제목, 누른제목변경] = useState(0);
+  let [입력값, 입력값변경] = useState("");
 
   // function 제목바꾸기() {
   //   //state는 건들지 말 것 -> 권장사항이 아님. 나중에 꼬일수도 있음.
@@ -68,6 +67,24 @@ function App() {
               </div>
             );
           })}
+
+          <div className="publish">
+            {/* e.target.value input에 입력된 값을 가져오기 */}
+            <input
+              onChange={(e) => {
+                입력값변경(e.target.value);
+              }}
+            />
+            <button
+              onClick={() => {
+                const changeList = [...글제목];
+                changeList.push(입력값);
+                글제목변경(changeList);
+              }}
+            >
+              저장
+            </button>
+          </div>
         </article>
 
         {/* 자식의 부모의 state를 쓰고 싶으면 반드시 이야기 해줘야 함.
